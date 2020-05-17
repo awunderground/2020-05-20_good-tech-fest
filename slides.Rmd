@@ -1,0 +1,321 @@
+---
+output:
+  revealjs::revealjs_presentation:
+    css: www/revealjs.css
+    incremental: TRUE
+    reveal_options:
+      slideNumber: TRUE
+      previewLinks: TRUE
+editor_options:
+  chunk_output_type: console
+params:
+  state: "Alabama"
+  year: 2016    
+---
+
+```{r setup, echo = FALSE, message = FALSE, warning = FALSE}
+library(knitr)
+library(tidyverse)
+
+opts_chunk$set(echo = FALSE)
+opts_chunk$set(message = FALSE)
+opts_chunk$set(warning = FALSE)
+opts_chunk$set(fig.align = "center")
+```
+
+# Iterated Fact Sheets With R Markdown
+
+## Iterated Fact Sheets With R Markdown
+
+Aaron R. Williams (@awunderground)
+
+```{r out.width = "50%"}
+knitr::include_graphics("www/images/fact-sheets.png")
+```
+
+# Urban Institute
+
+## Urban Institute
+
+<br>
+<br>
+
+```{r out.width = "500%"}
+knitr::include_graphics("www/images/urban-institute-logo.png")
+```
+
+## Who we are
+
+> * 300 researchers
+> * 50 years
+
+```{r out.width = "200%"}
+knitr::include_graphics("www/images/urban-centers.png")
+```
+
+## What we do
+
+Our mission is to open minds, shape decisions, and offer solutions through economic and social policy research.
+
+Our objective research helps expand opportunities for all, reduce hardship among the most vulnerable, and strengthen the effectiveness of the public sector.
+
+* Tax Policy Center analysis of candidate tax plans
+* Health Policy Center analysis of insurance coverage (King vs. Burwell)
+* Pioneers of paired testing and microsimulation
+
+# Why?
+
+## Motivation
+
+*Getting information into the right hands is important.*
+
+```{r out.width = "75%"}
+knitr::include_graphics("www/images/texas.jpg")
+```
+
+## Motivation
+
+*Our reports often seem like this.* 
+
+```{r out.width = "60%"}
+knitr::include_graphics("www/images/encyclopedia.jpg")
+```
+
+## Motivation
+
+*Our attention spans are trained for this.*
+
+```{r out.width = "75%", echo = FALSE}
+RXKCD::getXKCD(which = 539)$img
+```
+
+## Economic and social policy comic strips
+
+## ~~Economic and social policy comic strips~~ Iterated fact sheets and web pages
+
+## What does this look like?
+
+### 1. Targeted and brief
+
+## What does this look like?
+
+### 2. Visually appealing (and branded)
+
+```{r}
+knitr::include_graphics("www/images/colors.png")
+```
+
+```{r fig.show = "hold", out.width = "30%", fig.align = "default"}
+knitr::include_graphics("www/images/fonts.png")
+knitr::include_graphics("www/images/plots.png")
+```
+
+[Urban Institute data visualization style guide](https://urbaninstitute.github.io/graphics-styleguide/)
+
+## What does this look like? 
+
+### 3. Not labor intensive
+
+![cat](www/images/cat.gif)
+
+# What?
+
+## Examples
+
+> * [State fact sheets](https://www.urban.org/policy-centers/cross-center-initiatives/low-income-working-families/projects/state-by-state-look-children-immigrants)
+> * [County fact sheets](https://www.urban.org/policy-centers/health-policy-center/projects/california-county-fact-sheets-treatment-gaps-opioid-agonist-medication-assisted-therapy-oa-mat-and-estimates-how-many-additional-prescribers-are-needed)
+> * [State fact pages](https://www.urban.org/policy-centers/cross-center-initiatives/state-and-local-finance-initiative/projects/state-fiscal-briefs)
+
+# How?
+
+## <font color="#ffffff">R Markdown</font> {data-background=#1696d2}
+
+```{r out.width = "75%"}
+knitr::include_graphics("www/images/rmarkdown.png")
+```
+
+## .Rmd
+
+* Text and images
+* Code
+* Code output
+
+## .Rmd
+
+> * Text and images
+> * Code
+> * Code output
+
+<br>
+
+```{r out.width = "150%"}
+include_graphics("www/images/rmarkdownflow.png")
+```
+
+[R4DS](https://r4ds.had.co.nz/r-markdown.html)
+
+## Three ingredients for fact sheets/pages
+
+1) Data structure
+2) Parameterized .Rmd template
+3) Iterating script
+
+## 1) Data structure
+
+```{r echo = FALSE}
+library(urbnmapr)
+
+statedata %>%
+  select(state_name, hhpop, horate, medhhincome) %>%
+  filter(row_number() <= 8) %>%
+  knitr::kable()
+```
+
+* Typically one row per fact sheet/page
+
+## 2) Parameterized .Rmd template
+
+Parameters for R Markdown documents are specified in the YAML header:
+
+```
+---
+params:
+  state: "Alabama"
+  year: 2016
+---
+```
+
+`params$state` can be used anywhere in the document as `"Alabama"`.
+
+First, use the parameters to filter the big data structure to just data for an individual state or locality.
+
+```{r echo = TRUE, eval = FALSE}
+data <- data %>%
+  filter(state == params$state)
+```
+
+## 2) Parameterized .Rmd template
+
+```
+---
+params:
+  state: "Alabama"
+  year: 2016
+---
+```
+
+Now, we can use `data$<variable>` for the state/locality specific variables and `params$<parameter>` throughout the document:
+
+<br>
+
+```
+There were 'r data$fatalities' traffic fatalities in 'r params$state' in 'r params$year'. 
+```
+
+There were <font color="#1696d2">1,038</font> traffic fatalities in <font color="#1696d2">`r params$state`</font> in <font color="#1696d2">`r params$year`</font>.
+
+## 2) Parameterized .Rmd template
+
+Data viz!
+
+```{r image_grobs, fig.show = "hold", out.width = "30%", fig.align = "default"}
+knitr::include_graphics("www/images/urbnthemes.png")
+knitr::include_graphics("www/images/ggplot2.png")
+knitr::include_graphics("www/images/urbnmapr.png")
+```
+
+## 2) Parameterized .Rmd template
+
+> * LaTeX for .pdf
+
+* preamble.tex
+* general document styles
+* LaTeX macros
+    * `urbntitle{}`
+    * `urbnboilerplate{}`
+
+## 2) Parameterized .Rmd template
+
+> * CSS for .html
+> * CSS for .md
+
+* styles.css
+
+## 3) Iterating script
+
+```{r echo = TRUE, eval = FALSE}
+# create a data frame with parameters and output file names
+runs <- tibble(
+  # creates a string with output file names in the form <index>.pdf
+  output_file = str_c(index, ".html"),    
+  # creates a nested list of parameters for each object in the index
+  params = map(index, ~list(state = .))  
+)
+```
+
+<br>
+
+```{r, echo = TRUE, eval = FALSE}
+# iterate render() along the tibble of parameters and file names
+runs %>%
+  pwalk(rmarkdown::render, input = "template.Rmd", output_dir = "factsheets")
+```
+
+## 3) Iterating script
+
+TIP! Don't use `NA` in a YAML header.
+
+```
+---
+params:
+  state: "Alabama"
+  year: 2016
+---
+```
+
+## [Fact Sheet Tool](https://github.com/UrbanInstitute/rmarkdown-factsheets)
+
+## [Fact Page Tool](https://github.com/UI-Research/rmarkdown-fact-pages)
+
+## Overall Process
+
+1) Why fact sheets? 
+2) Create a Word/Google Doc template (if collaborating)
+3) Recreate the template for one iteration in .Rmd
+4) Iterate the .Rmd
+5) Quality control
+6) Create a home for the fact sheets
+
+## Takeaways
+
+* Visually consistent
+* Accurate
+* Easy to update
+
+# Data@Urban
+
+## Data@Urban
+
+```{r}
+knitr::include_graphics("www/images/data-at-urban.png")
+```
+
+* [Iterated fact sheets with R Markdown](https://medium.com/@urban_institute/iterated-fact-sheets-with-r-markdown-d685eb4eafce)
+* [Iterated PDFs with R Markdown](https://medium.com/@urban_institute/iterated-pdfs-with-r-markdown-144e2a6d6a1a)
+
+# Questions
+
+## Reach out to me
+
+> * awilliams@urban.org
+> * @awunderground
+
+# References
+
+## References
+
+[NHTSA Traffic Safety Fact Sheets](https://crashstats.nhtsa.dot.gov/Api/Public/ViewPublication/812581)
+
+Texas Statehouse - [LoneStarMike](https://en.wikipedia.org/wiki/Texas_State_Capitol#/media/File:TexasStateCapitol-2010-01.JPG)
+
+Encyclopedia - [WestportWiki](https://en.wikipedia.org/wiki/Encyclopedia#/media/File:Encyclopedia_Britannica_(crop).jpg)
