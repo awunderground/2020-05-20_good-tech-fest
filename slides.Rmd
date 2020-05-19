@@ -23,7 +23,7 @@ opts_chunk$set(warning = FALSE)
 opts_chunk$set(fig.align = "center")
 ```
 
-# Iterated Fact Sheets With R Markdown
+# <font color="#ffffff">Iterated Fact Sheets With R Markdown</font> {data-background=#1696d2}
 
 ## Iterated Fact Sheets With R Markdown
 
@@ -33,7 +33,7 @@ Aaron R. Williams (@awunderground)
 knitr::include_graphics("www/images/fact-sheets.png")
 ```
 
-# Urban Institute
+# <font color="#ffffff">Urban Institute</font> {data-background=#1696d2}
 
 ## Urban Institute
 
@@ -46,11 +46,11 @@ knitr::include_graphics("www/images/urban-institute-logo.png")
 
 ## Who we are
 
-> * 300 researchers
+> * 575 staff/300 researchers
 > * 50 years
 
 ```{r out.width = "200%"}
-knitr::include_graphics("www/images/urban-centers.png")
+knitr::include_graphics("www/images/urban-centers-highlighted.png")
 ```
 
 ## What we do
@@ -63,23 +63,23 @@ Our objective research helps expand opportunities for all, reduce hardship among
 * Health Policy Center analysis of insurance coverage (King vs. Burwell)
 * Pioneers of paired testing and microsimulation
 
-# Why?
+# <font color="#ffffff">Why?</font> {data-background=#1696d2}
 
-## Motivation
+## <font color="#ffffff">Motivation</font> {data-background="www/images/texas.jpg"}
 
-*Getting information into the right hands is important.*
+*<font color="#ffffff">Getting info into the</font>*
 
-```{r out.width = "75%"}
-knitr::include_graphics("www/images/texas.jpg")
-```
+*<font color="#ffffff">right hands is important.</font>*
 
-## Motivation
 
-*Our reports often seem like this.* 
+## <font color="#ffffff">Motivation</font> {data-background="www/images/encyclopedia.jpg"}
 
-```{r out.width = "60%"}
-knitr::include_graphics("www/images/encyclopedia.jpg")
-```
+<br>
+<br>
+<br>
+<br>
+
+<font color="#ffffff">*Reports often seem like this.*</font>
 
 ## Motivation
 
@@ -91,26 +91,42 @@ RXKCD::getXKCD(which = 539)$img
 
 ## Economic and social policy comic strips
 
-## ~~Economic and social policy comic strips~~ Iterated fact sheets and web pages
+## ~~Economic and social policy comic strips~~ <font color="#1696d2">Iterated fact sheets and web pages</font>
+
+## <font color="#ffffff">What does this look like?</font> {data-background="www/images/calendar.jpg"}
+
+### <font color="#ffffff">1. Targeted and brief for a meaningful subset</font>
+
+## What does this look like? {data-background="www/images/usmap.png"}
+
+### 1. Targeted and brief for a meaningful subset 
+
+## What does this look like? {data-background="www/images/georgetown.jpg"}
+
+### 1. Targeted and brief for a meaningful subset
 
 ## What does this look like?
 
-### 1. Targeted and brief
+### 2. Branded and visually appealing
+
+```{r fig.show = "hold", out.width = "60%"}
+knitr::include_graphics("www/images/plots.png")
+```
+
+<br>
+
+[Urban Institute data visualization style guide](https://urbaninstitute.github.io/graphics-styleguide/)
 
 ## What does this look like?
 
-### 2. Visually appealing (and branded)
+### 2. Branded and visually appealing
+
+<br>
+<br>
 
 ```{r}
 knitr::include_graphics("www/images/colors.png")
 ```
-
-```{r fig.show = "hold", out.width = "30%", fig.align = "default"}
-knitr::include_graphics("www/images/fonts.png")
-knitr::include_graphics("www/images/plots.png")
-```
-
-[Urban Institute data visualization style guide](https://urbaninstitute.github.io/graphics-styleguide/)
 
 ## What does this look like? 
 
@@ -118,7 +134,7 @@ knitr::include_graphics("www/images/plots.png")
 
 ![cat](www/images/cat.gif)
 
-# What?
+# <font color="#ffffff">What?</font> {data-background=#1696d2}
 
 ## Examples
 
@@ -126,19 +142,23 @@ knitr::include_graphics("www/images/plots.png")
 > * [County fact sheets](https://www.urban.org/policy-centers/health-policy-center/projects/california-county-fact-sheets-treatment-gaps-opioid-agonist-medication-assisted-therapy-oa-mat-and-estimates-how-many-additional-prescribers-are-needed)
 > * [State fact pages](https://www.urban.org/policy-centers/cross-center-initiatives/state-and-local-finance-initiative/projects/state-fiscal-briefs)
 
-# How?
+# <font color="#ffffff">How?</font> {data-background=#1696d2}
 
-## <font color="#ffffff">R Markdown</font> {data-background=#1696d2}
+## <font color="#ffffff">R</font>
 
-```{r out.width = "75%"}
-knitr::include_graphics("www/images/rmarkdown.png")
+```{r}
+knitr::include_graphics("www/images/rlogo.png")
 ```
 
-## .Rmd
+## .R Markdown
 
 * Text and images
 * Code
 * Code output
+
+## R Markdown
+
+<iframe width="2000" height="600" src="https://rmarkdown.rstudio.com/gallery.html"></iframe>
 
 ## .Rmd
 
@@ -156,9 +176,9 @@ include_graphics("www/images/rmarkdownflow.png")
 
 ## Three ingredients for fact sheets/pages
 
-1) Data structure
-2) Parameterized .Rmd template
-3) Iterating script
+* Data structure
+* Parameterized .Rmd template
+* Iterating script
 
 ## 1) Data structure
 
@@ -175,7 +195,19 @@ statedata %>%
 
 ## 2) Parameterized .Rmd template
 
+```
+---
+params:
+  state: "Alabama"
+  year: 2016
+---
+```
+
 Parameters for R Markdown documents are specified in the YAML header:
+
+
+
+## 2) Parameterized .Rmd template
 
 ```
 ---
@@ -186,6 +218,17 @@ params:
 ```
 
 `params$state` can be used anywhere in the document as `"Alabama"`.
+
+## 2) Parameterized .Rmd template
+
+
+```
+---
+params:
+  state: "Alabama"
+  year: 2016
+---
+```
 
 First, use the parameters to filter the big data structure to just data for an individual state or locality.
 
@@ -279,12 +322,12 @@ params:
 
 ## Overall Process
 
-1) Why fact sheets? 
-2) Create a Word/Google Doc template (if collaborating)
-3) Recreate the template for one iteration in .Rmd
-4) Iterate the .Rmd
-5) Quality control
-6) Create a home for the fact sheets
+* Why fact sheets? 
+* Create a Word/Google Doc template (if collaborating)
+* Recreate the template for one iteration in .Rmd
+* Iterate the .Rmd
+* Quality control
+* Create a home for the fact sheets
 
 ## Takeaways
 
@@ -292,9 +335,9 @@ params:
 * Accurate
 * Easy to update
 
-# Data@Urban
+# <font color="#ffffff">Data\@Urban</font> {data-background=#1696d2}
 
-## Data@Urban
+## [Data\@Urban](https://medium.com/@urban_institute)
 
 ```{r}
 knitr::include_graphics("www/images/data-at-urban.png")
@@ -303,19 +346,26 @@ knitr::include_graphics("www/images/data-at-urban.png")
 * [Iterated fact sheets with R Markdown](https://medium.com/@urban_institute/iterated-fact-sheets-with-r-markdown-d685eb4eafce)
 * [Iterated PDFs with R Markdown](https://medium.com/@urban_institute/iterated-pdfs-with-r-markdown-144e2a6d6a1a)
 
-# Questions
+# <font color="#ffffff">Questions</font> {data-background=#1696d2}
 
 ## Reach out to me
 
 > * awilliams@urban.org
 > * @awunderground
 
-# References
+# <font color="#ffffff">References</font> {data-background=#1696d2}
 
 ## References
 
-[NHTSA Traffic Safety Fact Sheets](https://crashstats.nhtsa.dot.gov/Api/Public/ViewPublication/812581)
+Calendar - [Dafne Cholet](https://www.flickr.com/photos/dafnecholet/5374200948/in/photolist-9bUbH3-2a3hQ-5U7uqn-8QQ8K3-3qMfSb-3qMfY7-q2VEP-2WX1J-rUyG8-ciW6b-5SLjF-6hEsk-5vZnPr-6CHvXt-8Hn4jy-85Kbxu-4cUF23-ztku6-bR4TB-2hPmvTW-fTtMs-3Pk7f7-9Tjo7V-67DVkN-2hPDEez-76v1pT-2hPJZbD-7TuSV-8TQz57-7rg49R-v3TgT-v3Tiq-fsTz3-v3ThC-6CMGa9-6CMFsb-6CMGH7-aFPwXa-5yMRZk-QtpPeq-5jLKHc-cT9Bh-9Tjoap-4JxCpF-2aNjrB-E5tpq-4bHpe2-9gZGC3-5qY8AB-fkDcy)
+
+Georgetown - [ehpien](https://www.flickr.com/photos/91499534@N00/2090429604/in/photolist-4bHZTJ-51en7R-7AXRbH-5ah6EH-x2L1bh-jBdpfA-SVmeb-rjcfi-rTb6gK-28oNSaR-SVmDE-2iXxnKy-2j2ALx2-7B2EaJ-rRigCH-o27gX-7sTHTY-CJ8FEr-2gy9vwE-518qp7-satRdq-rdCeLs-2dZgmvm-D994U-hmEzck-ecdTzh-r2zxZ1-7AXR3v-LQdd2g-dRYF7Q-6HP7ZR-AN7stw-9AKMoA-cuj6U7-9v2NNk-9HtHue-wWaCWg-khWAQt-a9ggbQ-6H7kqJ-xQJ69U-6qpmoq-9w7Nod-9jtCY9-8MK3ge-wW2MkY-92EwbP-51iyhL-5oyAf2-5hLJuD)
 
 Texas Statehouse - [LoneStarMike](https://en.wikipedia.org/wiki/Texas_State_Capitol#/media/File:TexasStateCapitol-2010-01.JPG)
 
 Encyclopedia - [WestportWiki](https://en.wikipedia.org/wiki/Encyclopedia#/media/File:Encyclopedia_Britannica_(crop).jpg)
+
+R logo - [The R Foundation](https://www.r-project.org/logo/)
+
+
+# <font color="#ffffff">Thank You</font> {data-background=#1696d2} 

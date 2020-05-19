@@ -88,3 +88,31 @@ img[alt=frontier] {
   clear: both;
   display: table;
 }
+
+/* bullet point styles */
+li {
+  list-style: none; /* Remove default bullets */
+}
+
+ul li::before {
+  content: "\25A0"; 
+  color: #1696d2; /* Change the color */
+  font-weight: bold; /* If you want it to be bold */
+  display: inline-block; /* Needed to add space between the bullet and the text */
+  width: 1em;  /* Also needed for space (tweak if needed) */
+  margin-left: -1em; /* Also needed for space (tweak if needed) */
+}
+
+/* hyperlink color */
+.reveal a {
+  color: #1696d2;
+}
+/* mouse over link */
+.reveal a:hover {
+  color: #ec008b;
+}
+
+/* selected link */
+.reveal a:active {
+  color: #ec008b;
+}
