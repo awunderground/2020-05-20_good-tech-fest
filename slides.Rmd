@@ -23,9 +23,9 @@ opts_chunk$set(warning = FALSE)
 opts_chunk$set(fig.align = "center")
 ```
 
-# <font color="#ffffff">Iterated Fact Sheets With R Markdown</font> {data-background=#1696d2}
+# <font color="#ffffff">Iterating Branded Fact Sheets and Web Pages with R Markdown</font> {data-background=#1696d2}
 
-## Iterated Fact Sheets With R Markdown
+## Iterating Branded Fact Sheets and Web Pages with R Markdown
 
 Aaron R. Williams (@awunderground)
 
@@ -150,7 +150,7 @@ knitr::include_graphics("www/images/colors.png")
 knitr::include_graphics("www/images/rlogo.png")
 ```
 
-## .R Markdown
+## R Markdown
 
 * Text and images
 * Code
@@ -203,7 +203,7 @@ params:
 ---
 ```
 
-Parameters for R Markdown documents are specified in the YAML header:
+Parameters for R Markdown documents are specified in the YAML header
 
 
 
